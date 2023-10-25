@@ -19,7 +19,9 @@ RUN apt-get update && apt-get install --no-install-recommends wget ffmpeg=7:* \
 
 WORKDIR /home/appuser/Grounded-Segment-Anything
 RUN python -m pip install --no-cache-dir -e segment_anything && \
-    python -m pip install --no-cache-dir -e GroundingDINO
+    python -m pip install --no-cache-dir -e GroundingDINO && \
+    python GroundingDINO/setup.py build && \
+    python GroundingDINO/setup.py install
 WORKDIR /home/appuser
 RUN pip install --no-cache-dir diffusers[torch]==0.15.1 opencv-python==4.7.0.72 \
     pycocotools==2.0.6 matplotlib==3.5.3 \
